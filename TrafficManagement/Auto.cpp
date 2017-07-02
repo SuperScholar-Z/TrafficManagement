@@ -130,8 +130,12 @@ BOOL CAuto::ShowImage(CString str)
 
 void CAuto::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
 	// TODO:  在此处添加消息处理程序代码
+	CPaintDC dc(this); // device context for painting
+	CRect rect;
+	GetClientRect(&rect);
+	dc.FillSolidRect(rect, RGB(255, 255, 255));
+	
 	if (strPathName != "")
 		ShowImage(strPathName);
 

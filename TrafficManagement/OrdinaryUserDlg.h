@@ -2,6 +2,8 @@
 #include "Auto.h"
 #include "Manual.h"
 #include "afxcmn.h"
+#include "afxwin.h"
+#include "UpdatePassword.h"
 
 
 // COrdinaryUserDlg ¶Ô»°¿ò
@@ -28,4 +30,9 @@ public:
 	CManual m_manual;
 	CTabCtrl m_tab;
 	afx_msg void OnClose();
+	CMenu m_oMenu;
+	CString oUserName;
+	CUpdatePassword uPsd1;
+	afx_msg void OnOUpdatePassword();
+	afx_msg void OnOSignOut();
 };

@@ -42,4 +42,5 @@ public:
 	afx_msg void OnBnClickedSignup();
 	CDlg dlg1;
 	COrdinaryUserDlg pOrdinaryUserDlg;
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

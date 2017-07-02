@@ -63,6 +63,9 @@
     <ClInclude Include="Manual.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="UpdatePassword.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficManagement.cpp">
@@ -102,6 +105,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Manual.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdatePassword.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -35,6 +35,8 @@ BEGIN_MESSAGE_MAP(CDriverTab, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &CDriverTab::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &CDriverTab::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, &CDriverTab::OnBnClickedButton4)
+	ON_WM_PAINT()
+	ON_CBN_SELCHANGE(IDC_COMBO1, &CDriverTab::OnCbnSelchangeCombo1)
 END_MESSAGE_MAP()
 
 
@@ -59,7 +61,6 @@ BOOL CDriverTab::OnInitDialog()
 	fieldText.InsertString(1, _T("姓名"));
 	fieldText.InsertString(2, _T("身份证号"));
 	fieldText.InsertString(3, _T("车牌号"));
-	fieldText.InsertString(4, _T("违章标记"));
 	fieldText.SetCurSel(0);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -86,13 +87,11 @@ void CDriverTab::OnBnClickedButton1()
 		strFieldVariant = "pid";
 	else if (strFieldText == "车牌号")
 		strFieldVariant = "pcid";
-	else if (strFieldText == "违章标记")
-		strFieldVariant = "pmark";
 	else
 		strFieldVariant = "";
 
 	//显示查找的结果
-	if (strFieldText == "全部信息")
+	if (strFieldText == "全部信息")	//显示全部信息
 	{
 		DriverList.DeleteAllItems();	//将之前的记录全部删除
 
@@ -127,11 +126,11 @@ void CDriverTab::OnBnClickedButton1()
 		str_pcid.clear();
 		str_pmark.clear();
 	}
-	else if (strFieldValue == "")
+	else if (strFieldValue == "")	//提示未输入搜索关键字
 	{
 		MessageBoxW(_T("请在编辑框中输入要查找的信息！"), _T("提示"));
 	}
-	else
+	else	//显示筛选的记录
 	{
 		DriverList.DeleteAllItems();	//将之前的记录全部删除
 
@@ -214,9 +213,40 @@ void CDriverTab::OnBnClickedButton4()
 	int row = DriverList.GetSelectionMark();
 	if (row >= 0)
 	{
+		INT_PTR nRes;
+		nRes = MessageBoxW(_T("确定要删除此条记录吗？"), _T("提示"), MB_OKCANCEL | MB_ICONQUESTION);
+		if (IDCANCEL == nRes)
+		{
+			return;
+		}
+
 		theApp.pdatabase.Delete("SELECT * FROM Tra_info", "pid", (_variant_t)DriverList.GetItemText(row, 1));
 		DriverList.DeleteItem(row);
 	}
 	else
 		MessageBoxW(_T("请在列表框选中要删除的车主信息!"), _T("提示"));
+}
+
+
+void CDriverTab::OnPaint()
+{
+	CPaintDC dc(this); // device context for painting
+	CRect rect;
+	GetClientRect(&rect);
+	dc.FillSolidRect(rect, RGB(255, 255, 255));
+	// TODO:  在此处添加消息处理程序代码
+	// 不为绘图消息调用 CDialogEx::OnPaint()
+}
+
+
+void CDriverTab::OnCbnSelchangeCombo1()
+{
+	// TODO:  在此添加控件通知处理程序代码
+	if (fieldText.GetCurSel() == 0)
+	{
+		fieldValue.SetWindowTextW((CString)"");
+		fieldValue.SetReadOnly(true);
+	}
+	else
+		fieldValue.SetReadOnly(false);
 }

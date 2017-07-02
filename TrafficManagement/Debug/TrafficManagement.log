@@ -1,8 +1,8 @@
-﻿生成启动时间为 2017/7/1 12:58:01。
+﻿生成启动时间为 2017/7/2 13:33:55。
      1>项目“D:\专业实训\TrafficManagement\TrafficManagement\TrafficManagement.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         F:\VS 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TrafficManagement.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Auto.cpp
-         Auto.cpp
+         F:\VS 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TrafficManagement.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TrafficManagementDlg.cpp
+         TrafficManagementDlg.cpp
        Link:
          F:\VS 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\专业实训\TrafficManagement\Debug\TrafficManagement.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"F:\VS 2013\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\专业实训\TrafficManagement\Debug\TrafficManagement.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\专业实训\TrafficManagement\Debug\TrafficManagement.lib" /MACHINE:X86 Debug\TrafficManagement.res
          Debug\AdministratorDlg.obj
@@ -16,6 +16,7 @@
          Debug\stdafx.obj
          Debug\TrafficManagement.obj
          Debug\TrafficManagementDlg.obj
+         Debug\UpdatePassword.obj
          Debug\UserTab.obj
          Debug\UserUpdateBox.obj
          TrafficManagement.vcxproj -> D:\专业实训\TrafficManagement\Debug\TrafficManagement.exe
@@ -23,4 +24,4 @@
 
 生成成功。
 
-已用时间 00:00:01.15
+已用时间 00:00:14.64

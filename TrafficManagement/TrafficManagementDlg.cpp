@@ -70,6 +70,7 @@ BEGIN_MESSAGE_MAP(CTrafficManagementDlg, CDialogEx)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CTrafficManagementDlg::OnTcnSelchangeTab1)
 	ON_BN_CLICKED(IDC_SIGNIN, &CTrafficManagementDlg::OnBnClickedSignin)
 	ON_BN_CLICKED(IDC_SIGNUP, &CTrafficManagementDlg::OnBnClickedSignup)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -108,25 +109,25 @@ BOOL CTrafficManagementDlg::OnInitDialog()
 	m_tab.InsertItem(0, _T("高级用户"));  //添加高级用户选项卡 
 	m_tab.InsertItem(1, _T("普通用户"));  //添加普通用户选项卡 
 
-	CFont * f;
-	f = new CFont;
-	f->CreateFont(16,            // nHeight 
-		0,           // nWidth 
-		0,           // nEscapement 
-		0,           // nOrientation 
-		FW_BOLD,     // nWeight 
-		FALSE,        // bItalic 
-		FALSE,       // bUnderline 
-		0,           // cStrikeOut 
-		ANSI_CHARSET,              // nCharSet 
-		OUT_DEFAULT_PRECIS,        // nOutPrecision 
-		CLIP_DEFAULT_PRECIS,       // nClipPrecision 
-		DEFAULT_QUALITY,           // nQuality 
-		DEFAULT_PITCH | FF_SWISS, // nPitchAndFamily 
-		_T("Arial"));              // lpszFac
+	//CFont * f;
+	//f = new CFont;
+	//f->CreateFont(16,            // nHeight 
+	//	0,           // nWidth 
+	//	0,           // nEscapement 
+	//	0,           // nOrientation 
+	//	FW_BOLD,     // nWeight 
+	//	FALSE,        // bItalic 
+	//	FALSE,       // bUnderline 
+	//	0,           // cStrikeOut 
+	//	ANSI_CHARSET,              // nCharSet 
+	//	OUT_DEFAULT_PRECIS,        // nOutPrecision 
+	//	CLIP_DEFAULT_PRECIS,       // nClipPrecision 
+	//	DEFAULT_QUALITY,           // nQuality 
+	//	DEFAULT_PITCH | FF_SWISS, // nPitchAndFamily 
+	//	_T("Arial"));              // lpszFac
 
-	GetDlgItem(IDC_STATIC1)->SetFont(f);
-	GetDlgItem(IDC_STATIC2)->SetFont(f);//设置标签控件字体大小
+	//GetDlgItem(IDC_STATIC1)->SetFont(f);
+	//GetDlgItem(IDC_STATIC2)->SetFont(f);//设置标签控件字体大小
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -180,20 +181,15 @@ HCURSOR CTrafficManagementDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
-
-//void CTrafficManagementDlg::OnBnClickedButton1()
-//{
-//	// TODO:  在此添加控件通知处理程序代码
-//	if (pAdministratorDlg.m_hWnd == NULL)
-//		pAdministratorDlg.Create(IDD_ADMINISTRATOR_DLG);
-//	pAdministratorDlg.ShowWindow(true);
-//}
-
-
 void CTrafficManagementDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// TODO:  在此添加控件通知处理程序代码
+
+	if (m_tab.GetCurSel() == 0)
+		GetDlgItem(IDC_SIGNUP)->ShowWindow(false);
+	else
+		GetDlgItem(IDC_SIGNUP)->ShowWindow(true);
+
 	*pResult = 0;
 }
 
@@ -232,7 +228,10 @@ void CTrafficManagementDlg::OnBnClickedSignin()
 						AfxMessageBox(_T("高级用户登录"));
 						//跳转到高级用户窗口操作
 						if (pAdministratorDlg.m_hWnd == NULL)
+						{
+							pAdministratorDlg.aUserName = userName1;
 							pAdministratorDlg.Create(IDD_ADMINISTRATOR_DLG);
+						}
 						pAdministratorDlg.ShowWindow(true);
 
 						this->ShowWindow(false);
@@ -248,7 +247,10 @@ void CTrafficManagementDlg::OnBnClickedSignin()
 						AfxMessageBox(_T("普通用户登录"));
 						//跳转到普通用户窗口操作
 						if (pOrdinaryUserDlg.m_hWnd == NULL)
+						{
+							pOrdinaryUserDlg.oUserName = userName1;
 							pOrdinaryUserDlg.Create(IDD_ORDINARYUSER_DIALOG);
+						}
 						pOrdinaryUserDlg.ShowWindow(true);
 
 						this->ShowWindow(false);
@@ -284,4 +286,22 @@ void CAboutDlg::OnBnClickedOk()
 {
 	// TODO:  在此添加控件通知处理程序代码
 	CDialogEx::OnOK();
+}
+
+
+HBRUSH CTrafficManagementDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO:  在此更改 DC 的任何特性
+	switch (nCtlColor)
+	{
+	case CTLCOLOR_STATIC:
+		pDC->SetBkColor(RGB(255, 255, 255));
+	default:
+		break;
+	}
+
+	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
+	return hbr;
 }

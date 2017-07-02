@@ -32,4 +32,6 @@ public:
 	afx_msg void OnBnClickedButton4();
 	CUserUpdateBox pUserUpdateBox;
 	CEdit fieldValue;
+	afx_msg void OnPaint();
+	afx_msg void OnCbnSelchangeCombo1();
 };

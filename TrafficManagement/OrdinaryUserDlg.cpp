@@ -14,6 +14,7 @@ IMPLEMENT_DYNAMIC(COrdinaryUserDlg, CDialogEx)
 
 COrdinaryUserDlg::COrdinaryUserDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(COrdinaryUserDlg::IDD, pParent)
+	, oUserName(_T(""))
 {
 
 }
@@ -32,6 +33,8 @@ void COrdinaryUserDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(COrdinaryUserDlg, CDialogEx)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &COrdinaryUserDlg::OnTcnSelchangeTab1)
 	ON_WM_CLOSE()
+	ON_COMMAND(ID_32771, &COrdinaryUserDlg::OnOUpdatePassword)
+	ON_COMMAND(ID_32772, &COrdinaryUserDlg::OnOSignOut)
 END_MESSAGE_MAP()
 
 BOOL COrdinaryUserDlg::OnInitDialog()
@@ -39,6 +42,12 @@ BOOL COrdinaryUserDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// TODO:  在此添加额外的初始化
+	//加载显示用户名的菜单
+	m_oMenu.LoadMenuW(IDR_MENU);
+	SetMenu(&m_oMenu);
+	m_oMenu.ModifyMenu(0, MF_BYPOSITION, -1, oUserName);
+
+	//初始化Tab栏
 	CRect tabRect;
 	m_tab.InsertItem(0, _T("自动识别"));
 	m_tab.InsertItem(1, _T("人工识别"));
@@ -92,4 +101,28 @@ void COrdinaryUserDlg::OnClose()
 	parent->DestroyWindow();
 
 	CDialogEx::OnClose();
+}
+
+
+void COrdinaryUserDlg::OnOUpdatePassword()
+{
+	// TODO:  在此添加命令处理程序代码
+	uPsd1.userName = oUserName;
+	if (uPsd1.m_hWnd == NULL)
+		uPsd1.Create(IDD_UPDATEPASSWORDDLG);
+	uPsd1.ShowWindow(TRUE);
+}
+
+
+void COrdinaryUserDlg::OnOSignOut()
+{
+	// TODO:  在此添加命令处理程序代码
+	CTrafficManagementDlg *parent = (CTrafficManagementDlg*)GetParent();
+	parent->ShowWindow(TRUE);
+	parent->SetDlgItemTextW(IDC_USERNAME, _T(""));
+	parent->SetDlgItemTextW(IDC_PASSWORD, _T(""));
+
+	m_oMenu.DestroyMenu();//销毁菜单
+
+	this->DestroyWindow();
 }

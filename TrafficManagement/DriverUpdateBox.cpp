@@ -75,11 +75,11 @@ void CDriverUpdateBox::OnBnClickedButton1()
 		else if (theApp.pdatabase.Find("SELECT * FROM Tra_info", "pid", (_variant_t)pid) == -1)
 		{
 			theApp.pdatabase.Add("SELECT * FROM Tra_info", (_variant_t)pname, (_variant_t)pid, (_variant_t)pcid, (_variant_t)pmark);
-			MessageBoxW(_T("添加成功!"), _T("提示"));
+			if (MessageBoxW(_T("添加成功!"), _T("提示")) == IDOK)
+				this->DestroyWindow();
 		}
 		else
 			MessageBoxW(_T("已存在该记录，请重新核对信息!"), _T("提示"));
-		OnClose();
 	}
 	else if (strButton == "修改")	//修改车主信息
 	{
@@ -116,10 +116,10 @@ void CDriverUpdateBox::OnBnClickedButton1()
 				theApp.pdatabase.Update("SELECT * FROM Tra_info", "pid", (_variant_t)str_pid, "pmark", (_variant_t)pmark);
 				check_pmark = pmark;
 			}
-			MessageBoxW(_T("修改成功!"), _T("提示"));
+			if (MessageBoxW(_T("修改成功!"), _T("提示")) == IDOK)
+				this->DestroyWindow();
 		}
 		else
 			MessageBoxW(_T("该身份证号已存在，请重新核对输入!"), _T("提示"));
-		OnClose();
 	}
 }

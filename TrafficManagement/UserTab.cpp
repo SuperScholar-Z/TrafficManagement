@@ -36,6 +36,8 @@ BEGIN_MESSAGE_MAP(CUserTab, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &CUserTab::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &CUserTab::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, &CUserTab::OnBnClickedButton4)
+	ON_WM_PAINT()
+	ON_CBN_SELCHANGE(IDC_COMBO1, &CUserTab::OnCbnSelchangeCombo1)
 END_MESSAGE_MAP()
 
 
@@ -180,9 +182,40 @@ void CUserTab::OnBnClickedButton4()
 	int row = UserList.GetSelectionMark();
 	if (row >= 0)
 	{
+		INT_PTR nRes;
+		nRes = MessageBoxW(_T("确定要删除此条记录吗？"), _T("提示"), MB_OKCANCEL | MB_ICONQUESTION);
+		if (IDCANCEL == nRes)
+		{
+			return;
+		}
+
 		theApp.pdatabase.Delete("SELECT * FROM Tra_user", "userName", (_variant_t)UserList.GetItemText(row, 0));
 		UserList.DeleteItem(row);
 	}
 	else
 		MessageBoxW(_T("请在列表框选中要删除的用户信息!"), _T("提示"));
+}
+
+
+void CUserTab::OnPaint()
+{
+	CPaintDC dc(this); // device context for painting
+	CRect rect;
+	GetClientRect(&rect);
+	dc.FillSolidRect(rect, RGB(255, 255, 255));
+	// TODO:  在此处添加消息处理程序代码
+	// 不为绘图消息调用 CDialogEx::OnPaint()
+}
+
+
+void CUserTab::OnCbnSelchangeCombo1()
+{
+	// TODO:  在此添加控件通知处理程序代码
+	if (fieldText.GetCurSel() == 0)
+	{
+		fieldValue.SetWindowTextW((CString)"");
+		fieldValue.SetReadOnly(true);
+	}
+	else
+		fieldValue.SetReadOnly(false);
 }

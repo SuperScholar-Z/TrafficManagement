@@ -114,6 +114,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TrafficManagement.h" />
     <ClInclude Include="TrafficManagementDlg.h" />
+    <ClInclude Include="UpdatePassword.h" />
     <ClInclude Include="UserTab.h" />
     <ClInclude Include="UserUpdateBox.h" />
   </ItemGroup>
@@ -132,6 +133,7 @@
     </ClCompile>
     <ClCompile Include="TrafficManagement.cpp" />
     <ClCompile Include="TrafficManagementDlg.cpp" />
+    <ClCompile Include="UpdatePassword.cpp" />
     <ClCompile Include="UserTab.cpp" />
     <ClCompile Include="UserUpdateBox.cpp" />
   </ItemGroup>

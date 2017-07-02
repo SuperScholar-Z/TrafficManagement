@@ -31,4 +31,6 @@ public:
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButton4();
 	CDriverUpdateBox pDriverUpdateBox;
+	afx_msg void OnPaint();
+	afx_msg void OnCbnSelchangeCombo1();
 };

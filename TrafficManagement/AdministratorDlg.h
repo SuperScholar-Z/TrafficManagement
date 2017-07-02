@@ -2,6 +2,8 @@
 #include "afxcmn.h"
 #include "DriverTab.h"
 #include "UserTab.h"
+#include "afxwin.h"
+#include "UpdatePassword.h"
 
 
 // CAdministratorDlg ¶Ô»°¿ò
@@ -29,4 +31,10 @@ public:
 	CUserTab pUserTab;
 	afx_msg void OnSysKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnClose();
+//	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	CMenu m_aMenu;
+	CString aUserName;
+	afx_msg void OnAUpdatePassword();
+	afx_msg void On32772();
+	CUpdatePassword uPsd2;
 };

@@ -57,7 +57,8 @@ void CUserUpdateBox::OnBnClickedButton1()
 		else if (theApp.pdatabase.Find("SELECT * FROM Tra_user", "userName", (_variant_t)userName) == -1)
 		{
 			theApp.pdatabase.Add("SELECT * FROM Tra_user", (_variant_t)userName, (_variant_t)password, 0);
-			MessageBoxW(_T("添加成功!"), _T("提示"));
+			if (MessageBoxW(_T("添加成功!"), _T("提示")) == IDOK)
+				this->DestroyWindow();
 		}
 		else
 			MessageBoxW(_T("已存在该用户名，请重新输入!"), _T("提示"));
@@ -86,7 +87,8 @@ void CUserUpdateBox::OnBnClickedButton1()
 				theApp.pdatabase.Update("SELECT * FROM Tra_user", "userName", (_variant_t)str_userName, "password", (_variant_t)password);
 				str_password = password;
 			}
-			MessageBoxW(_T("修改成功!"), _T("提示"));
+			if (MessageBoxW(_T("修改成功!"), _T("提示")) == IDOK)
+				this->DestroyWindow();
 		}
 		else
 			MessageBoxW(_T("该用户名已存在，请重新输入!"), _T("提示"));
